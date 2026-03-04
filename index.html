@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notizblock</title>
 
+    <script src="scripts/db.js"></script>
+    <script src="scripts/template.js"></script>
     <script src="script.js"></script>
 
     <link rel="stylesheet" href="style.css">
@@ -13,7 +15,8 @@
 </head>
 <body onload="init()">
     <h1>Notizblock</h1>
-    <input id="note-input" type="text">
+    <input id="noteTitle-input" type="text" placeholder="Title eingeben ...">
+    <input id="note-input" type="text" placeholder="Notiz eingeben ...">
     <button onclick="addNote()">Notiz speichern</button>
 
     <h2>Notes</h2>
