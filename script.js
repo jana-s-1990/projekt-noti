@@ -1,12 +1,10 @@
-let notes = ["Tisch decken", "Staub saugen"];
-
-let trashNotes =[];
-
-
 function init(){
     getFormLocalStorage();
+    getFormLocalStorageArchiv();
     getFormLocalStorageTrash();
+
     renderNotes();
+    renderArchivNotes();
     renderTrashNotes();
 }
 
@@ -18,12 +16,15 @@ function renderNotes(){
         contentRef.innerHTML += getNotesTemplate(noteIndex);
     }
 }
-function getNotesTemplate(noteIndex){
-    return /*html*/`
-        <p>${allNotes.notesTitle[noteIndex]}</p>
-        <p>+ ${allNotes.notes[noteIndex]}<button onclick="trashNote(${noteIndex})">Papierkorb</button></p>
-    `
+function renderArchivNotes(){
+    let contentArchivRef = document.getElementById("archiv-content");
+    contentArchivRef.innerHTML = "";
+
+    for (let archivNoteIndex = 0; archivNoteIndex < allNotes.archivNotes.length; archivNoteIndex++) {
+        contentArchivRef.innerHTML += getArchivNotesTemplate(archivNoteIndex);
+    }
 }
+
 
 function renderTrashNotes(){
     let contentTrashRef = document.getElementById("trash-content");
@@ -34,12 +35,7 @@ function renderTrashNotes(){
     }
 }
 
-function getTrashNotesTemplate(trashNoteIndex){
-    return /*html*/`
-    <p>${allNotes.trashNotesTitle[trashNoteIndex]}</p>
-        <p>+ ${allNotes.trashNotes[trashNoteIndex]}<button onclick="deleteNote(${trashNoteIndex})">X</button></p>
-    `
-}
+
 
 
 function addNote(){
@@ -64,6 +60,10 @@ function setToLocalStorage(){
     localStorage.setItem("notesTitle", JSON.stringify(allNotes.notesTitle));
     localStorage.setItem("notes", JSON.stringify(allNotes.notes));
 }
+function setToLocalStorageArchiv(){
+    localStorage.setItem("archivNotesTitle", JSON.stringify(allNotes.archivNotesTitle));
+    localStorage.setItem("archivNotes", JSON.stringify(allNotes.archivNotes));
+}
 function setToLocalStorageTrash(){
     localStorage.setItem("trashNotesTitle", JSON.stringify(allNotes.trashNotesTitle));
     localStorage.setItem("trashNotes", JSON.stringify(allNotes.trashNotes));
@@ -78,7 +78,15 @@ function getFormLocalStorage(){
         allNotes.notes = localNotes;        
     }
 }
+function getFormLocalStorageArchiv(){
+    let localArchivNotesTitle = JSON.parse(localStorage.getItem("archivNotesTitle"));
+    let localArchivNotes = JSON.parse(localStorage.getItem("archivNotes"));
 
+    if(localArchivNotes !== null){
+        allNotes.archivNotesTitle = localArchivNotesTitle;
+        allNotes.archivNotes = localArchivNotes;        
+    }
+}
 function getFormLocalStorageTrash(){
     let localTrashNotesTitle = JSON.parse(localStorage.getItem("trashNotesTitle"));
     let localTrashNotes = JSON.parse(localStorage.getItem("trashNotes"));
@@ -89,7 +97,22 @@ function getFormLocalStorageTrash(){
     }
 }
 
-//notizen löschen
+function setToArchivNote(indexNote){
+    let archivNoteTitle = allNotes.notesTitle.splice(indexNote, 1)[0];
+    let archivNote = allNotes.notes.splice(indexNote, 1)[0];
+
+    allNotes.archivNotesTitle.push(archivNoteTitle);
+    allNotes.archivNotes.push(archivNote);
+
+    setToLocalStorage();
+    setToLocalStorageArchiv();
+    setToLocalStorageTrash();
+
+    renderNotes();
+    renderArchivNotes();
+    renderTrashNotes();
+}
+
 function trashNote(indexNote){
     let trashNoteTitle = allNotes.notesTitle.splice(indexNote, 1)[0];
     let trashNote = allNotes.notes.splice(indexNote, 1)[0];
@@ -104,9 +127,25 @@ function trashNote(indexNote){
     renderNotes();
     renderTrashNotes();
 }
+function trashNoteFromArchiv(indexNote){
+    let trashNoteTitle = allNotes.archivNotesTitle.splice(indexNote, 1)[0];
+    let trashNote = allNotes.archivNotes.splice(indexNote, 1)[0];
+
+    allNotes.trashNotesTitle.push(trashNoteTitle);
+    allNotes.trashNotes.push(trashNote);
+
+    setToLocalStorageArchiv();
+    setToLocalStorageTrash();
+
+    renderArchivNotes();
+    renderTrashNotes();
+
+}
 
 function deleteNote(indexNote){
-    trashNotes.splice(indexNote, 1)[0];
+    allNotes.trashNotesTitle.splice(indexNote, 1)[0];
+    allNotes.trashNotes.splice(indexNote, 1)[0];
+
     setToLocalStorageTrash();
     renderTrashNotes();
 }
