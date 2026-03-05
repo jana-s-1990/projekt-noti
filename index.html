@@ -1,29 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Notizblock</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
     <script src="scripts/db.js"></script>
     <script src="scripts/localStroage.js"></script>
     <script src="scripts/template.js"></script>
     <script src="script.js"></script>
 
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="styles/standard.css">
-
-</head>
-<body onload="init()">
-    <h1>Notizblock</h1>
-    <input id="noteTitle-input" type="text" placeholder="Title eingeben ...">
-    <input id="note-input" type="text" placeholder="Notiz eingeben ...">
-    <button onclick="addNote()">Notiz speichern</button>
-    <h2>Notes</h2>
-    <div id="content-activ"></div>
-    <h2>Archiv</h2>
-    <div id="content-archiv"></div>
-    <h2>Trash</h2>
-    <div id="content-trash"></div>
-</body>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/standard.css" />
+    <link rel="stylesheet" href="styles/assets.css">
+    <link rel="stylesheet" href="styles/note.css" />
+  </head>
+  <body onload="init()">
+    <div class="content-container">
+      <h1>Notizblock</h1>
+      <input
+        id="noteTitle-input"
+        type="text"
+        placeholder="Title eingeben ..."
+      />
+      <input id="note-input" type="text" placeholder="Notiz eingeben ..." />
+      <button onclick="addNote()">Notiz speichern</button>
+      <h2>Notes</h2>
+      <div id="content-activ" class="flex-container container-notes"></div>
+      <h2>Archiv</h2>
+      <div id="content-archiv" class="flex-container container-notes"></div>
+      <h2>Trash</h2>
+      <div id="content-trash" class="flex-container container-notes"></div>
+    </div>
+  </body>
 </html>

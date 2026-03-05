@@ -1,0 +1,22 @@
+.note{
+    background-color: var(--bg-color-note-activ);
+    padding: 15px 10px;
+    border-radius: 10px;
+    width: 200px;
+    flex-direction: column;
+}
+#content-archiv .note{
+    background-color: var(--bg-color-note-archiv);
+}
+#content-trash .note{
+    background-color: var(--bg-color-note-trash);
+}
+.note-headline {
+    margin-bottom: 20px;
+}
+.note-content {
+    flex: 1;
+}
+.btn-delete{
+    background-color: #D02423;
+}

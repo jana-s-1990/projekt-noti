@@ -1,0 +1,10 @@
+.container-btn{
+    justify-content: space-between;
+    margin-top: 16px;
+}
+.container-notes{
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
