@@ -6,6 +6,7 @@
     <title>Notizblock</title>
 
     <script src="scripts/db.js"></script>
+    <script src="scripts/localStroage.js"></script>
     <script src="scripts/template.js"></script>
     <script src="script.js"></script>
 
@@ -18,15 +19,11 @@
     <input id="noteTitle-input" type="text" placeholder="Title eingeben ...">
     <input id="note-input" type="text" placeholder="Notiz eingeben ...">
     <button onclick="addNote()">Notiz speichern</button>
-
     <h2>Notes</h2>
-    <div id="content"></div>
-
+    <div id="content-activ"></div>
     <h2>Archiv</h2>
-    <div id="archiv-content"></div>
-
+    <div id="content-archiv"></div>
     <h2>Trash</h2>
-    <div id="trash-content"></div>
-    
+    <div id="content-trash"></div>
 </body>
 </html>
